@@ -1,0 +1,10 @@
+REPORT Z_ABPTRAIN_SML_EXER5.
+
+*Exercise 5 - Use the WRITE Statement
+
+WRITE: 'Employee Number: 123456',
+      /'First Name: Shannon',
+      /'Last Name: Lee',
+      /'Birthdate: January 5th',
+      /'Dream Salary: $1,000,000',
+      /'Hobby: Gaming'.
