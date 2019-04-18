@@ -1,0 +1,28 @@
+REPORT Z_ABPTRAIN_SML_EXER10.
+
+*Exercise 10 - Constants Declaration
+
+*Data Declaration
+DATA: employeeNumber(6) TYPE n,
+      fName(25) TYPE c,
+      lName(25) TYPE c.
+
+CONSTANTS: c_bdate(8) TYPE d VALUE '19870105',
+           c_dreamSalary(10) TYPE c VALUE '$1,000,000',
+           c_hobby(25) TYPE c VALUE 'Gaming'.
+
+*Initialize variables
+employeeNumber = '123456'.
+fName = 'Shannon'.
+lName = 'Lee'.
+
+WRITE: |Employee Number: { employeeNumber }|,
+     / |First Name: { fName }|,
+     / |Last Name: { lName }|,
+     / |Birhtday: { c_bdate }|,
+     / |Dream Salary: { c_dreamSalary }|,
+     / |Hobby: { c_hobby }|,
+     / |User Name: { sy-uname }|,
+     / |User Local Time: { sy-timlo }|,
+     / |User Local Date: { sy-datlo }|,
+     / |SAP Logon Language Key: { sy-langu }|.
