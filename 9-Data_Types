@@ -1,0 +1,30 @@
+REPORT Z_ABPTRAIN_SML_EXER9.
+
+*Exercise 9 - Data Types
+
+*Data Declaration
+DATA: employeeNumber(6) TYPE n,
+      fName(25) TYPE c,
+      lName(25) TYPE c,
+      bdate(8) TYPE d,
+      dreamSalary(10) TYPE c,
+      hobby(25) TYPE c.
+
+*Initialize variables
+employeeNumber = '123456'.
+fName = 'Shannon'.
+lName = 'Lee'.
+bdate = '19870105'.
+dreamSalary = '$1,000,000'.
+hobby = 'Gaming'.
+
+WRITE: |Employee Number: { employeeNumber }|,
+     / |First Name: { fName }|,
+     / |Last Name: { lName }|,
+     / |Birhtday: { bdate }|,
+     / |Dream Salary: { dreamSalary }|,
+     / |Hobby: { hobby }|,
+     / |User Name: { sy-uname }|,
+     / |User Local Time: { sy-timlo }|,
+     / |User Local Date: { sy-datlo }|,
+     / |SAP Logon Language Key: { sy-langu }|.
