@@ -1,0 +1,14 @@
+REPORT Z_ABPTRAIN_SML_EXER8.
+
+*Exercise 8 - String Templates
+
+WRITE: |{ text-001 }|,
+     / |{ text-002 }|,
+     / |{ text-003 }|,
+     / |{ text-004 }|,
+     / |{ text-005 }|,
+     / |{ text-006 }|,
+     / |User Name: { sy-uname }|,
+     / |User Local Time: { sy-timlo }|,
+     / |User Local Date: { sy-datlo }|,
+     / |SAP Logon Language Key: { sy-langu }|.
