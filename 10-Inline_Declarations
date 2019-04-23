@@ -1,0 +1,22 @@
+REPORT Z_ABPTRAIN_SML_EXER11.
+
+*Exercise 11 - Inline Declarations
+
+*Inline Data Declaration
+DATA(employeeNumber) = '123456'.
+DATA(fName) = 'Shannon'.
+DATA(lName) = 'Lee'.
+DATA(bdate) = '19870105'.
+DATA(dreamSalary) = '$1,000,000'.
+DATA(hobby) = 'Gaming'.
+
+WRITE: |Employee Number: { employeeNumber }|,
+     / |First Name: { fName }|,
+     / |Last Name: { lName }|,
+     / |Birhtday: { bdate }|,
+     / |Dream Salary: { dreamSalary }|,
+     / |Hobby: { hobby }|,
+     / |User Name: { sy-uname }|,
+     / |User Local Time: { sy-timlo }|,
+     / |User Local Date: { sy-datlo }|,
+     / |SAP Logon Language Key: { sy-langu }|.
