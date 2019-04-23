@@ -1,0 +1,34 @@
+REPORT Z_ABPTRAIN_SML_EXER13.
+
+*Exercise 13 - Sub-Fields: Offset and Length
+
+*TYPES Statements
+TYPES: BEGIN OF ls_employeeProfile,
+         employeeNumber(6) TYPE n,
+         fName TYPE string,
+         lName TYPE string,
+         bdate TYPE d,
+         dreamSalary TYPE string,
+         hobby TYPE string,
+       END OF ls_employeeProfile.
+
+*Inline Data Declaration with TYPES
+DATA(employeeProfile) = VALUE ls_employeeProfile( employeeNumber = '123456'
+                                                  fName = 'Shannon'
+                                                  lName = 'Lee'
+                                                  bdate = '19870105'
+                                                  dreamSalary = '$1,000,000'
+                                                  hobby = 'Gaming').
+
+WRITE: |Employee Number: { employeeProfile-employeeNumber }|,
+     / |First Name Initial: { employeeProfile-fName(1) }|,
+     / |Last Name Initial: { employeeProfile-lName(1) }|,
+     / |Birth Month: { employeeProfile-bdate+4(2) }|,
+     / |Birth Day: { employeeProfile-bdate+6(2) }|,
+     / |Birth Year: { employeeProfile-bdate(4) }|,
+     / |Dream Salary: { employeeProfile-dreamSalary }|,
+     / |Hobby: { employeeProfile-hobby }|,
+     / |User Name: { sy-uname }|,
+     / |User Local Time: { sy-timlo }|,
+     / |User Local Date: { sy-datlo }|,
+     / |SAP Logon Language Key: { sy-langu }|.
