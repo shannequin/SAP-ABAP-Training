@@ -1,0 +1,18 @@
+REPORT Z_ABPTRAIN_SML_EXER15.
+
+*Exercise 15 - Declaring Parameters
+
+*Parameter Declaration
+PARAMETERS: p_empNum(6) TYPE n,
+            p_fName TYPE string,
+            p_lName TYPE string,
+            p_bdate TYPE d,
+            p_salary TYPE string,
+            p_hobby TYPE string.
+
+*Display parameters
+WRITE: |Employee Number: { p_empNum }|,
+     / |Full Name: { p_fName } { p_lName }|,
+     / |Birthdate: { p_bdate }|,
+     / |Dream Salary: { p_salary }|,
+     / |Hobby: { p_hobby }|.
