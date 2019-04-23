@@ -1,0 +1,32 @@
+REPORT Z_ABPTRAIN_SML_EXER12.
+
+*Exercise 12 - TYPES Statements
+
+*TYPES Statements
+TYPES: BEGIN OF ls_employeeProfile,
+         employeeNumber(6) TYPE n,
+         fName TYPE string,
+         lName TYPE string,
+         bdate TYPE d,
+         dreamSalary TYPE string,
+         hobby TYPE string,
+       END OF ls_employeeProfile.
+
+*Inline Data Declaration with TYPES
+DATA(employeeProfile) = VALUE ls_employeeProfile( employeeNumber = '123456'
+                                                  fName = 'Shannon'
+                                                  lName = 'Lee'
+                                                  bdate = '19870105'
+                                                  dreamSalary = '$1,000,000'
+                                                  hobby = 'Gaming').
+
+WRITE: |Employee Number: { employeeProfile-employeeNumber }|,
+     / |First Name: { employeeProfile-fName }|,
+     / |Last Name: { employeeProfile-lName }|,
+     / |Birhtday: { employeeProfile-bdate }|,
+     / |Dream Salary: { employeeProfile-dreamSalary }|,
+     / |Hobby: { employeeProfile-hobby }|,
+     / |User Name: { sy-uname }|,
+     / |User Local Time: { sy-timlo }|,
+     / |User Local Date: { sy-datlo }|,
+     / |SAP Logon Language Key: { sy-langu }|.
