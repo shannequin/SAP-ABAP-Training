@@ -1,0 +1,17 @@
+REPORT Z_ABPTRAIN_SML_EXER23.
+
+*Exercise 23 - CONTINUE Statements
+
+*Maintain Selection Texts
+
+*Declare Parameters
+PARAMETERS: p_loopCt TYPE i,
+            p_gr8r TYPE i.
+
+*Loop and print iteration times
+DO p_loopCt TIMES.
+  IF sy-index =< p_gr8r.
+    CONTINUE.
+  ENDIF.
+  WRITE / sy-index.
+ENDDO.
