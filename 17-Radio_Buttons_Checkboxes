@@ -1,0 +1,51 @@
+REPORT Z_ABPTRAIN_SML_EXER17.
+
+*Exercise 17 - Radio Buttons and Checkboxes
+
+*Maintain Selection Texts also
+
+*Data Declaration
+DATA: gender TYPE string, "Accepts selection from radio buttons
+      driving TYPE c VALUE 'N'. "Accepts selection from checkbox
+
+*Parameter Declaration
+PARAMETERS: p_empNum(6) TYPE n,
+            p_fName TYPE string,
+            p_lName TYPE string,
+            p_bdate TYPE d,
+            p_salary TYPE string,
+            p_hobby TYPE string.
+
+*Radio Button Parameters
+SELECTION-SCREEN BEGIN OF BLOCK rb_g
+                  WITH FRAME TITLE text-001.
+  PARAMETERS: rb_fem RADIOBUTTON GROUP gr1,
+              rb_mal RADIOBUTTON GROUP gr1,
+              rb_oth RADIOBUTTON GROUP gr1.
+SELECTION-SCREEN END OF BLOCK rb_g.
+
+*Gets input from radio buttons and initializes gender variable
+IF rb_fem = 'X'.
+  gender = 'Female'.
+ELSEIF rb_mal = 'X'.
+  gender = 'Male'.
+ELSEIF rb_oth = 'X'.
+  gender = 'Other'.
+ENDIF.
+
+*Checkbox Parameter
+PARAMETERS p_drive AS CHECKBOX.
+
+*Gets input from checkbox and updates driving variable
+IF p_drive = 'X'.
+  driving = 'Y'.
+ENDIF.
+
+*Display input
+WRITE: |Employee Number: { p_empNum }|,
+     / |Full Name: { p_fName } { p_lName }|,
+     / |Birthdate: { p_bdate }|,
+     / |Dream Salary: { p_salary }|,
+     / |Hobby: { p_hobby }|,
+     / |Gender: { gender }|,
+     / |Capable of driving: { driving }|.
