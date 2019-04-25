@@ -1,0 +1,42 @@
+REPORT Z_ABPTRAIN_SML_EXER19.
+
+*Exercise 19 - IF Statements
+
+*Maintain Selection Texts
+
+*Declare Parameters
+PARAMETERS: p_num1 TYPE decfloat16,
+            p_num2 TYPE decfloat16,
+            p_add AS CHECKBOX,
+            p_subtr AS CHECKBOX,
+            p_multi AS CHECKBOX,
+            p_div AS CHECKBOX,
+            p_mod AS CHECKBOX.
+
+*Calculate Parameters and Display
+
+*Sum
+IF p_add = 'X'.
+  WRITE |The sum of { p_num1 } and { p_num2 } is { p_num1 + p_num2 }|.
+ENDIF.
+
+
+*Difference
+IF p_subtr = 'X'.
+  WRITE / |The difference between { p_num1 } and { p_num2 } is { p_num1 - p_num2 }|.
+ENDIF.
+
+*Product
+IF p_multi = 'X'.
+  WRITE / |The product of { p_num1 } and { p_num2 } is { p_num1 * p_num2 }|.
+ENDIF.
+
+*Quotient
+IF p_div = 'X'.
+  WRITE / |The quotient of { p_num1 } and { p_num2 } is { p_num1 / p_num2 }|.
+ENDIF.
+
+*Modulo
+IF p_mod = 'X'.
+  WRITE / |The remainder of { p_num1 } and { p_num2 } is { p_num1 MOD p_num2 }|.
+ENDIF.
