@@ -1,0 +1,13 @@
+REPORT Z_ABPTRAIN_SML_EXER22.
+
+*Exercise 22 - DO Loops
+
+*Maintain Selection Texts
+
+*Declare Parameters
+PARAMETERS p_loopCt TYPE i.
+
+*Loop and print iteration times
+DO p_loopCt TIMES.
+  WRITE / sy-index.
+ENDDO.
