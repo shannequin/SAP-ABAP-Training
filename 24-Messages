@@ -1,0 +1,57 @@
+REPORT Z_ABPTRAIN_SML_EXER24 MESSAGE-ID ZMSG_CLASS.
+
+*Exercise 24 - Messages
+
+*Maintain Selection Texts
+
+*Declare Parameters
+PARAMETERS: p_num1 TYPE decfloat16,
+            p_num2 TYPE decfloat16.
+
+*Radio Button Parameters
+SELECTION-SCREEN BEGIN OF BLOCK rb_g
+                  WITH FRAME TITLE text-001.
+  PARAMETERS: rb_add RADIOBUTTON GROUP gr1,
+              rb_sub RADIOBUTTON GROUP gr1,
+              rb_mult RADIOBUTTON GROUP gr1,
+              rb_div RADIOBUTTON GROUP gr1,
+              rb_mod RADIOBUTTON GROUP gr1.
+SELECTION-SCREEN END OF BLOCK rb_g.
+
+*Message to alert dividing by zero
+AT SELECTION-SCREEN.
+  IF p_num2 = 0 AND rb_div = 'X'.
+    MESSAGE E000.
+  ENDIF.
+  IF p_num2 = 0 AND rb_mod = 'X'.
+    MESSAGE E000.
+  ENDIF.
+START-OF-SELECTION.
+
+*Calculate Parameters and Display
+
+DATA(output) =
+COND string(
+
+*Sum
+  WHEN rb_add = 'X'
+    THEN |The sum of { p_num1 } and { p_num2 } is { p_num1 + p_num2 }|
+
+*Difference
+  WHEN rb_sub = 'X'
+    THEN |The difference between { p_num1 } and { p_num2 } is { p_num1 - p_num2 }|
+
+*Product
+  WHEN rb_mult = 'X'
+      THEN |The product of { p_num1 } and { p_num2 } is { p_num1 * p_num2 }|
+
+*Quotient
+  WHEN rb_div = 'X'
+      THEN |The quotient of { p_num1 } and { p_num2 } is { p_num1 / p_num2 }|
+
+*Modulo
+  WHEN rb_mod = 'X'
+      THEN |The remainder of { p_num1 } and { p_num2 } is { p_num1 MOD p_num2 }| ).
+
+*Display output
+WRITE output.
