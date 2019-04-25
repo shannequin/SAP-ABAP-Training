@@ -1,0 +1,26 @@
+REPORT Z_ABPTRAIN_SML_EXER18.
+
+*Exercise 18 - Arithmetic Expressions
+
+*Maintain Selection Texts
+
+*Declare Parameters
+PARAMETERS: p_num1 TYPE decfloat16,
+            p_num2 TYPE decfloat16.
+
+*Calculate Parameters and Display
+
+*Sum
+WRITE |The sum of { p_num1 } and { p_num2 } is { p_num1 + p_num2 }|.
+
+*Difference
+WRITE / |The difference between { p_num1 } and { p_num2 } is { p_num1 - p_num2 }|.
+
+*Product
+WRITE / |The product of { p_num1 } and { p_num2 } is { p_num1 * p_num2 }|.
+
+*Quotient
+WRITE / |The quotient of { p_num1 } and { p_num2 } is { p_num1 / p_num2 }|.
+
+*Modulo
+WRITE / |The remainder of { p_num1 } and { p_num2 } is { p_num1 MOD p_num2 }|.
