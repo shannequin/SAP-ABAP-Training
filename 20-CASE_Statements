@@ -1,0 +1,43 @@
+REPORT Z_ABPTRAIN_SML_EXER20.
+
+*Exercise 20 - CASE Statements
+
+*Maintain Selection Texts
+
+*Declare Parameters
+PARAMETERS: p_num1 TYPE decfloat16,
+            p_num2 TYPE decfloat16.
+
+*Radio Button Parameters
+SELECTION-SCREEN BEGIN OF BLOCK rb_g
+                  WITH FRAME TITLE text-001.
+  PARAMETERS: rb_add RADIOBUTTON GROUP gr1,
+              rb_sub RADIOBUTTON GROUP gr1,
+              rb_mult RADIOBUTTON GROUP gr1,
+              rb_div RADIOBUTTON GROUP gr1,
+              rb_mod RADIOBUTTON GROUP gr1.
+SELECTION-SCREEN END OF BLOCK rb_g.
+
+*Calculate Parameters and Display
+
+CASE 'X'.
+*Sum
+  WHEN rb_add.
+    WRITE |The sum of { p_num1 } and { p_num2 } is { p_num1 + p_num2 }|.
+
+*Difference
+  WHEN rb_sub.
+    WRITE |The difference between { p_num1 } and { p_num2 } is { p_num1 - p_num2 }|.
+
+*Product
+  WHEN rb_mult.
+      WRITE / |The product of { p_num1 } and { p_num2 } is { p_num1 * p_num2 }|.
+
+*Quotient
+  WHEN rb_div.
+      WRITE / |The quotient of { p_num1 } and { p_num2 } is { p_num1 / p_num2 }|.
+
+*Modulo
+  WHEN rb_mod.
+      WRITE / |The remainder of { p_num1 } and { p_num2 } is { p_num1 MOD p_num2 }|.
+ENDCASE.
