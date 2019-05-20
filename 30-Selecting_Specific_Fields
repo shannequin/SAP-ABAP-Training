@@ -1,0 +1,19 @@
+REPORT Z_ABPTRAIN_SML_EXER30.
+
+*Exercise 30 - Selecting Specific Fields
+*Select fields: Airline Code, Flight Connection Number, Country Key from SPFLI
+
+TYPES: BEGIN OF t_spfli,
+        airlineCode      TYPE spfli-carrid,
+        flightConnection TYPE spfli-connid,
+        countryKey       TYPE spfli-countryfr,
+END OF t_spfli.
+
+DATA wa_spfli TYPE t_spfli.
+
+SELECT carrid
+       connid
+       countryfr
+FROM spfli
+INTO wa_spfli.
+ENDSELECT.
