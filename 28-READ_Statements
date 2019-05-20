@@ -1,0 +1,52 @@
+REPORT Z_ABPTRAIN_SML_EXER28.
+
+*Exercise 28 - READ Statements
+*Create column for index number and display the number of lines the internal table has.
+
+*Maintain Selection Texts
+
+*Declare Parameters and Variables
+PARAMETERS: p_fName TYPE string,
+            p_lName TYPE string,
+            p_bYear(4) TYPE n,
+            p_eNum(1) TYPE n.
+
+*Create Structure and Internal Table
+TYPES: BEGIN OF t_person,
+          firstName TYPE string,
+          lastName TYPE string,
+          birthYear(4) TYPE n,
+          year(4) TYPE n,
+          age(4) TYPE n,
+          index TYPE i,
+       END OF t_person.
+
+DATA: i_person_std TYPE STANDARD TABLE OF t_person WITH EMPTY KEY.
+
+*Loop for entryNumber
+DO p_eNum TIMES.
+*Append Internal Table with Parameters
+  APPEND INITIAL LINE TO i_person_std ASSIGNING FIELD-SYMBOL(<fs_person>).
+  <fs_person>-firstName = p_fName.
+  <fs_person>-lastName = p_lName.
+  <fs_person>-birthYear = p_byear.
+  <fs_person>-index = lines( i_person_std ). "Counts number of lines
+ENDDO.
+
+*Unassign Field Symbol
+IF <fs_person> IS ASSIGNED.
+  UNASSIGN <fs_person>.
+ENDIF.
+
+*Display Internal Table with extra fields year (equal to current year minus sy-tabix) and age in that year.
+LOOP AT i_person_std ASSIGNING <fs_person>.
+  <fs_person>-year = sy-datum(4) - sy-tabix. "Initialize year with current year minus sy-tabix
+  <fs_person>-age = <fs_person>-year - <fs_person>-birthYear. "Initialize age with year minus birthYear
+
+  WRITE: / |{ <fs_person>-index }|,
+           |{ <fs_person>-firstName }|,
+           |{ <fs_person>-lastName }|,
+           |{ <fs_person>-birthYear }|,
+           |{ <fs_person>-year }|,
+           |{ <fs_person>-age }|.
+ENDLOOP.
