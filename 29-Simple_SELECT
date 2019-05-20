@@ -1,0 +1,10 @@
+REPORT Z_ABPTRAIN_SML_EXER29.
+
+*Exercise 29 - Simple SELECT
+*Make a simple select statement for table SPFLI
+
+DATA wa_spfli TYPE spfli.
+
+SELECT * FROM spfli
+  INTO wa_spfli.
+ENDSELECT.
