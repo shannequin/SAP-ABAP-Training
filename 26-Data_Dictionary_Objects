@@ -1,0 +1,16 @@
+REPORT Z_ABPTRAIN_SML_EXER26.
+
+*Exercise 26 - Data Dictionary Objects
+
+*Display table SFLIGHT
+*Fields: SEATSMAX, SEATSMAX_B, and SEATSMAX_F
+
+*Data elements:
+***Attributes inherited from domain: Data type and Length
+***Field labels: (long) Maximum capacity economy class, Maximum capacity business class, Maximum capacity in first class
+
+***Domain: S_SEATS
+***Data type: int4
+***Number of characters: 10
+***Output length: 10
+***Value table: n/a
