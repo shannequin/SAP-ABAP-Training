@@ -1,0 +1,47 @@
+REPORT Z_ABPTRAIN_SML_EXER49.
+
+*Exercise 49 - MVC 2
+
+*Maintain Selection Text
+
+*Get 2 integers
+PARAMETERS: p_num1 TYPE i,  "First number
+            p_num2 TYPE i.  "Second number
+
+DATA:  cb_add TYPE c, "Flag for Add Checkbox
+       cb_sub TYPE c, "Flag for Subtract Checkbox
+      cb_mult TYPE c, "Flag for Multiply Checkbox
+       cb_div TYPE c, "Flag for Divide Checkbox
+      o_model TYPE REF TO ZCL_ABPTRAIN_SML_EXER49_MODEL, "Model Class object to get input
+ o_controller TYPE REF TO ZCL_ABPTRAIN_SML_EXER49_CONTR, "Controller Class object to run business logic
+       o_view TYPE REF TO ZCL_ABPTRAIN_SML_EXER49_VIEW.  "View Class object to display output
+
+*Call popup screen with checkboxes for calculation
+CALL SCREEN 100 STARTING AT 10 08
+                  ENDING AT 50 20.
+
+*After user input, initializes calculation flags
+MODULE USER_COMMAND_0100 INPUT.
+
+  "Model Constructor sets attribute values
+  CREATE OBJECT: o_model EXPORTING p_num1 = p_num1
+                                   p_num2 = p_num2
+                                   flag_a = cb_add
+                                   flag_s = cb_sub
+                                   flag_m = cb_mult
+                                   flag_d = cb_div.
+  "Controller Constructor gets data from Model
+  CREATE OBJECT: o_controller EXPORTING model_data = o_model.
+
+  "Call method to calculate data
+  o_controller->calc_results( ).
+
+  "View Constructor gets controller data
+  CREATE OBJECT: o_view EXPORTING contr_data = o_controller.
+
+  "Call method to display result
+  o_view->display_results( ).
+
+  LEAVE TO SCREEN 0.
+
+ENDMODULE.
