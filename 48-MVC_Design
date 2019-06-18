@@ -1,0 +1,57 @@
+REPORT Z_ABPTRAIN_SML_EXER48.
+
+*Exercise 48 - MVC Design
+
+*Maintain Selection Text
+
+*Get 2 integers
+PARAMETERS: p_num1 TYPE i,  "First number
+            p_num2 TYPE i.  "Second number
+
+DATA: rb_selected TYPE c. "Flag for radio button selected
+
+*Select a calculation from 4 radio buttons
+SELECTION-SCREEN BEGIN OF BLOCK block1 WITH FRAME TITLE text-001.
+  PARAMETERS: rb_add RADIOBUTTON GROUP grp1,  "Addition
+              rb_sub RADIOBUTTON GROUP grp1,  "Subtraction
+              rb_mult RADIOBUTTON GROUP grp1, "Multiplication
+              rb_div RADIOBUTTON GROUP grp1.  "Division
+SELECTION-SCREEN END OF BLOCK block1.
+
+*Initializes rb_selected
+CASE 'X'.
+  WHEN rb_add.
+    rb_selected = 'a'.
+  WHEN rb_sub.
+    rb_selected = 's'.
+  WHEN rb_mult.
+    rb_selected = 'm'.
+  WHEN rb_div.
+    rb_selected = 'd'.
+ENDCASE.
+
+*Call Model Class object to get input
+DATA: o_model TYPE REF TO ZCL_ABPTRAIN_SML_EXER48_MODEL.
+
+CREATE OBJECT: o_model EXPORTING p_num1 = p_num1
+                                 p_num2 = p_num2
+                                 rb_selected = rb_selected.
+
+
+*Call Controller Class object to run business logic
+DATA: o_controller TYPE REF TO ZCL_ABPTRAIN_SML_EXER48_CONTR.
+
+*Constructor gets model data
+CREATE OBJECT: o_controller EXPORTING model_data = o_model.
+
+*Call method to calculate data
+o_controller->calc_num( ).
+
+*Call View Class object to display output
+DATA: o_view TYPE REF TO ZCL_ABPTRAIN_SML_EXER48_VIEW.
+
+*Constructor gets controller data
+CREATE OBJECT: o_view EXPORTING contr_data = o_controller.
+
+*Call method to display result
+o_view->display_result( ).
