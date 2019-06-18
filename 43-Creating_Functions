@@ -1,0 +1,53 @@
+REPORT Z_ABPTRAIN_SML_EXER43B MESSAGE-ID ZMSG_CLASS.
+
+*Exercise 43 - Creating Functions
+
+*Maintain Selection Texts
+
+*Declare Parameters
+PARAMETERS: p_num1 TYPE decfloat16,
+            p_num2 TYPE decfloat16.
+
+*Declare structure to hold radio button selection
+DATA rb_sel TYPE string.
+
+*Radio Button Parameters
+SELECTION-SCREEN BEGIN OF BLOCK rb_g
+                  WITH FRAME TITLE text-001.
+  PARAMETERS: rb_add RADIOBUTTON GROUP gr1,
+              rb_sub RADIOBUTTON GROUP gr1,
+              rb_mult RADIOBUTTON GROUP gr1,
+              rb_div RADIOBUTTON GROUP gr1,
+              rb_mod RADIOBUTTON GROUP gr1.
+SELECTION-SCREEN END OF BLOCK rb_g.
+
+START-OF-SELECTION.
+
+*Get radio button selected
+CASE 'X'.
+  WHEN rb_add.
+    rb_sel = 'add'.
+  WHEN rb_sub.
+    rb_sel = 'sub'.
+  WHEN rb_mult.
+    rb_sel = 'mult'.
+  WHEN rb_div.
+    rb_sel = 'div'.
+  WHEN rb_mod.
+    rb_sel = 'mod'.
+ENDCASE.
+
+*Calculate function
+  CALL FUNCTION 'ZTEST_CALCULATE'
+    EXPORTING
+      num1 = p_num1
+      num2 = p_num2
+      rb_selected = rb_sel
+    EXCEPTIONS
+      non_number = 1.
+
+*Throws exceptions if non-number
+  CASE sy-subrc.
+    WHEN 1.
+      MESSAGE E003.
+  ENDCASE.
