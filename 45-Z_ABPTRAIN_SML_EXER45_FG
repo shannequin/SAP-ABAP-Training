@@ -1,0 +1,8 @@
+FUNCTION-POOL Z_ABPTRAIN_SML_EXER45_FG.     "MESSAGE-ID ..
+
+* INCLUDE LZ_ABPTRAIN_SML_EXER45_FGD...      " Local class definition
+
+
+DATA: gv_num1 TYPE n,
+      gv_num2 TYPE n,
+      gv_num3 TYPE n.
