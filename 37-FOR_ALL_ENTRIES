@@ -1,0 +1,18 @@
+REPORT Z_ABPTRAIN_SML_EXER37.
+
+*Exercise 37 - For All Entries
+
+*Use carrid and connid from spfli to get carrid, connid, fldate, price, and currency from sflight
+
+SELECT carrid, connid
+FROM spfli
+INTO TABLE @DATA(i_spfli).
+
+SELECT carrid, connid, fldate, price, currency
+FROM sflight
+INTO TABLE @DATA(i_sflight)
+FOR ALL ENTRIES IN @i_spfli
+WHERE carrid = @i_spfli-carrid AND
+      connid = @i_spfli-connid.
+
+CL_DEMO_OUTPUT=>DISPLAY( i_sflight ).
