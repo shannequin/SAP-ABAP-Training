@@ -1,0 +1,26 @@
+FUNCTION Z_ABPTRAIN_SML_EXER45_FM1.
+*"----------------------------------------------------------------------
+*"*"Local Interface:
+*"  IMPORTING
+*"     REFERENCE(LV_NUM1) TYPE  N
+*"     REFERENCE(LV_NUM2) TYPE  N
+*"     REFERENCE(LV_NUM3) TYPE  N
+*"  EXCEPTIONS
+*"      OUT_OF_RANGE
+*"----------------------------------------------------------------------
+*Accepts 3 numbers and sets them to global variables in function group
+
+*Exception: out_of_range
+IF ( lv_num1 < 0 OR lv_num1 > 100 ) OR
+   ( lv_num2 < 0 OR lv_num2 > 100 ) OR
+   ( lv_num3 < 0 OR lv_num3 > 100 ).
+  RAISE out_of_range.
+ENDIF.
+
+*Set global variables to input
+gv_num1 = lv_num1.
+gv_num2 = lv_num2.
+gv_num3 = lv_num3.
+
+
+ENDFUNCTION.
