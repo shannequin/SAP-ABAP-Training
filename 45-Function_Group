@@ -1,0 +1,50 @@
+REPORT Z_ABPTRAIN_SML_EXER45.
+
+*Exercise 45 - Function Group
+*Create a report that accepts 3 integers, then calls 3 functions from group created
+
+*Maintain Selection Text
+*Get 3 numbers
+PARAMETERS: p_num1(3) TYPE n,
+            p_num2(3) TYPE n,
+            p_num3(3) TYPE n.
+
+*Declare variables to hold output
+DATA:    lv_sum_one_two TYPE n,
+       lv_sum_two_three TYPE n,
+        lv_diff_one_two TYPE n,
+      lv_diff_two_three TYPE n.
+
+AT SELECTION-SCREEN.
+
+*Call function to accept 3 numbers
+CALL FUNCTION 'Z_ABPTRAIN_SML_EXER45_FM1'
+  EXPORTING
+    lv_num1 = p_num1
+    lv_num2 = p_num2
+    lv_num3 = p_num3
+  EXCEPTIONS
+    out_of_range = 1.
+
+*Exception handling
+IF sy-subrc = 1.
+  MESSAGE |Input out of range. Enter a number between 1 and 100| TYPE 'E' DISPLAY LIKE 'I'.
+ENDIF.
+
+*Call function to add numbers
+CALL FUNCTION 'Z_ABPTRAIN_SML_EXER45_FM2'
+  IMPORTING
+      sum_one_two = lv_sum_one_two
+    sum_two_three = lv_sum_two_three.
+
+*Call function to subtract numbers
+CALL FUNCTION 'Z_ABPTRAIN_SML_EXER45_FM3'
+  IMPORTING
+      diff_one_two = lv_diff_one_two
+    diff_two_three = lv_diff_two_three.
+
+*Display results
+WRITE: |First number + second number = { lv_sum_one_two }|,
+     / |Second number + third number = { lv_sum_two_three }|,
+     / |First number - second number = { lv_diff_one_two }|,
+     / |Second number - third number = { lv_diff_two_three }|.
