@@ -1,0 +1,16 @@
+REPORT Z_ABPTRAIN_SML_EXER32.
+
+*Exercise 32 - SELECT SINGLE
+*Retrieve a single record
+
+TYPES: BEGIN OF t_spfli,
+        airlineCode      TYPE spfli-carrid,
+        flightConnection TYPE spfli-connid,
+        countryKey       TYPE spfli-countryfr,
+END OF t_spfli.
+
+SELECT SINGLE carrid,
+              connid,
+              countryfr
+FROM spfli
+INTO @DATA(wa_spfli).
