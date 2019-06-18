@@ -1,0 +1,38 @@
+REPORT Z_ABPTRAIN_SML_EXER44B.
+
+*Exercise 44B - Simple ALV w/ inline table declaration
+
+*Declare field catalog
+DATA: i_fieldcat TYPE slis_t_fieldcat_alv.
+
+*Build field catalog
+i_fieldcat = VALUE #( ( fieldname = 'carrid'   seltext_l = 'Airline ID' )
+                      ( fieldname = 'connid'   seltext_l = 'Flight Number' )
+                      ( fieldname = 'fldate'   seltext_l = 'Flight Date' )
+                      ( fieldname = 'price'    seltext_l = 'Airfair' )
+                      ( fieldname = 'currency' seltext_l = 'Local Currency' ) ).
+
+*Use carrid and connid from spfli to get carrid, connid, fldate, price, and currency from sflight
+SELECT carrid, connid
+FROM spfli
+INTO TABLE @DATA(i_spfli).
+
+SELECT carrid, connid, fldate, price, currency
+FROM sflight
+INTO TABLE @DATA(i_sflight) "Inline table declaration
+FOR ALL ENTRIES IN @i_spfli
+WHERE carrid = @i_spfli-carrid AND
+      connid = @i_spfli-connid.
+
+*ALV Display Function
+CALL FUNCTION 'REUSE_ALV_GRID_DISPLAY'
+  EXPORTING
+    it_fieldcat = i_fieldcat
+  TABLES
+    t_outtab = i_sflight
+  EXCEPTIONS
+    program_error = 1
+    OTHERS = 2.
+IF sy-subrc <> 0.
+  MESSAGE |An error occured.| TYPE 'E'.
+ENDIF.
