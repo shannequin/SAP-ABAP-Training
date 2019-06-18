@@ -1,0 +1,37 @@
+REPORT Z_ABPTRAIN_SML_EXER41 MESSAGE-ID ZMSG_CLASS.
+
+*Exercise 41 - SELECTION-SCREEN Event
+
+*Maintain Selection Texts
+
+PARAMETERS p_carrid TYPE string.
+
+DATA paraFlag(1) TYPE c VALUE ' '.
+
+AT SELECTION-SCREEN.
+SELECT carrid
+FROM scarr
+INTO TABLE @DATA(i_scarr).
+
+LOOP AT i_scarr ASSIGNING FIELD-SYMBOL(<fs_scarr>).
+  IF <fs_scarr>-carrid = p_carrid.
+    paraFlag = 'X'.
+    EXIT.
+  ENDIF.
+ENDLOOP.
+
+IF paraFlag = ' '.
+  MESSAGE E001.
+ENDIF.
+
+START-OF-SELECTION.
+
+SELECT spfli~*
+FROM spfli INNER JOIN scarr
+           ON spfli~carrid = scarr~carrid
+INTO TABLE @DATA(i_spfli)
+WHERE scarr~carrid = @p_carrid.
+
+LOOP AT i_spfli ASSIGNING FIELD-SYMBOL(<fs_spfli>).
+  WRITE: / |{ <fs_spfli>-carrid } { <fs_spfli>-connid } { <fs_spfli>-countryfr } { <fs_spfli>-fltime }|.
+ENDLOOP.
