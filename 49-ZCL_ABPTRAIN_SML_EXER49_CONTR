@@ -1,0 +1,66 @@
+class ZCL_ABPTRAIN_SML_EXER49_CONTR definition
+  public
+  final
+  create public .
+
+public section.
+
+  data MODEL_DATA type ref to ZCL_ABPTRAIN_SML_EXER49_MODEL .
+  data RESULT_ADD type I .
+  data RESULT_SUB type I .
+  data RESULT_MULT type I .
+  data RESULT_DIV type P .
+
+  methods CONSTRUCTOR
+    importing
+      !MODEL_DATA type ref to ZCL_ABPTRAIN_SML_EXER49_MODEL .
+  methods CALC_RESULTS .
+protected section.
+private section.
+ENDCLASS.
+
+
+
+CLASS ZCL_ABPTRAIN_SML_EXER49_CONTR IMPLEMENTATION.
+
+
+* <SIGNATURE>---------------------------------------------------------------------------------------+
+* | Instance Public Method ZCL_ABPTRAIN_SML_EXER49_CONTR->CALC_RESULTS
+* +-------------------------------------------------------------------------------------------------+
+* +--------------------------------------------------------------------------------------</SIGNATURE>
+  method CALC_RESULTS.
+*Calculate if checkbox checked
+
+    "Add
+    IF me->model_data->flag_add = 'X'.
+      result_add = me->model_data->v_num1 + me->model_data->v_num2.
+    ENDIF.
+
+    "Subtract
+    IF me->model_data->flag_sub = 'X'.
+      result_sub = me->model_data->v_num1 - me->model_data->v_num2.
+    ENDIF.
+
+    "Multiply
+    IF me->model_data->flag_mult = 'X'.
+      result_mult = me->model_data->v_num1 * me->model_data->v_num2.
+    ENDIF.
+
+    "Divide
+    IF me->model_data->flag_div = 'X'.
+      result_div = me->model_data->v_num1 / me->model_data->v_num2.
+    ENDIF.
+
+  endmethod.
+
+
+* <SIGNATURE>---------------------------------------------------------------------------------------+
+* | Instance Public Method ZCL_ABPTRAIN_SML_EXER49_CONTR->CONSTRUCTOR
+* +-------------------------------------------------------------------------------------------------+
+* | [--->] MODEL_DATA                     TYPE REF TO ZCL_ABPTRAIN_SML_EXER49_MODEL
+* +--------------------------------------------------------------------------------------</SIGNATURE>
+  method CONSTRUCTOR.
+*Gets data from Model
+    me->model_data = model_data.
+  endmethod.
+ENDCLASS.
