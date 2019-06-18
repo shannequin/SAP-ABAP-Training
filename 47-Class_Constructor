@@ -1,0 +1,111 @@
+REPORT Z_ABPTRAIN_SML_EXER47.
+
+*Exercise 47 - Class Constructor
+*Create a local class with contructor
+*If input is out of range, set value to 1
+
+*Class to add/subtract 3 numbers
+CLASS lcl_add_sub DEFINITION.
+
+  PUBLIC SECTION.
+
+    METHODS: constructor IMPORTING p_n1 TYPE n
+                                   p_n2 TYPE n
+                                   p_n3 TYPE n,
+             set_numbers IMPORTING p_n1 TYPE n
+                                   p_n2 TYPE n
+                                   p_n3 TYPE n,
+             add_numbers,
+             sub_numbers,
+             get_sum RETURNING VALUE(s_result) TYPE string,
+             get_diff RETURNING VALUE(d_result) TYPE string.
+
+  "Variables to hold input
+  PRIVATE SECTION.
+    DATA: num1(3) TYPE n,
+          num2(3) TYPE n,
+          num3(3) TYPE n,
+    "Strings to hold results
+    sum_result TYPE string,
+          diff_result TYPE string.
+
+ENDCLASS.
+
+CLASS lcl_add_sub IMPLEMENTATION.
+
+  "Constructor sets private variables from input
+  METHOD constructor.
+    num1 = p_n1.
+    num2 = p_n2.
+    num3 = p_n3.
+  ENDMETHOD.
+
+  "Sets private variables from input
+  METHOD set_numbers.
+    num1 = p_n1.
+    num2 = p_n2.
+    num3 = p_n3.
+  ENDMETHOD.
+
+  "Adds variables
+  METHOD add_numbers.
+*    sum_one_two = num1 + num2.
+*    sum_two_three = num2 + num3.
+*
+    sum_result = |{ num1 } + { num2 } = { num1 + num2 } AND { num2 } + { num3 } = { num2 + num3 }|.
+  ENDMETHOD.
+
+  "Subtracts variables
+  METHOD sub_numbers.
+    diff_result = |{ num1 } - { num2 } = { num1 - num2 } AND { num2 } - { num3 } = { num2 - num3 }|.
+  ENDMETHOD.
+
+  METHOD get_sum.
+    s_result = sum_result.
+  ENDMETHOD.
+
+  METHOD get_diff.
+    d_result = diff_result.
+  ENDMETHOD.
+
+ENDCLASS.
+
+*Main Program
+
+START-OF-SELECTION.
+
+*Maintain Selection Text
+*Get 3 numbers
+PARAMETERS: p_num1(3) TYPE n,
+            p_num2(3) TYPE n,
+            p_num3(3) TYPE n.
+
+*If out of range, set values to 1
+IF ( p_num1 < 0 OR p_num1 > 100 ) OR ( p_num2 < 0 OR p_num2 > 100 ) OR ( p_num3 < 0 OR p_num3 > 100 ).
+  MESSAGE: |Invlid input: out of range. Setting all values to 1.| TYPE 'I'.
+
+  p_num1 = 1.
+  p_num2 = 1.
+  p_num3 = 1.
+ENDIF.
+
+*Instantiate object
+*DATA: lo_add_sub TYPE REF TO lcl_add_sub.
+*CREATE OBJECT lo_add_sub.
+DATA(lo_add_sub) = NEW lcl_add_sub( p_n1 = p_num1
+                                    p_n2 = p_num2
+                                    p_n3 = p_num3 ).
+
+*Call method to set object variables
+*lo_add_sub->set_numbers( p_n1 = p_num1
+*                         p_n2 = p_num2
+*                         p_n3 = p_num3 ).
+
+*Call method to add numbers
+lo_add_sub->add_numbers( ).
+*Call method to subtract numbers
+lo_add_sub->sub_numbers( ).
+
+*Display results
+WRITE: |{ lo_add_sub->get_sum( ) }|,
+      / |{ lo_add_sub->get_diff( ) }|.
