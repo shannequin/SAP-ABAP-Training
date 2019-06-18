@@ -1,0 +1,17 @@
+REPORT Z_ABPTRAIN_SML_EXER31.
+
+*Exercise 31 - Inline Declaration
+*Use inline declaration
+
+TYPES: BEGIN OF t_spfli,
+        airlineCode      TYPE spfli-carrid,
+        flightConnection TYPE spfli-connid,
+        countryKey       TYPE spfli-countryfr,
+END OF t_spfli.
+
+SELECT carrid,
+       connid,
+       countryfr
+FROM spfli
+INTO @DATA(wa_spfli).
+ENDSELECT.
