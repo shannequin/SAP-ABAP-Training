@@ -1,0 +1,15 @@
+FUNCTION Z_ABPTRAIN_SML_EXER45_FM3.
+*"----------------------------------------------------------------------
+*"*"Local Interface:
+*"  EXPORTING
+*"     REFERENCE(DIFF_ONE_TWO) TYPE  N
+*"     REFERENCE(DIFF_TWO_THREE) TYPE  N
+*"----------------------------------------------------------------------
+
+*Subtracts global variables from function group
+  diff_one_two = gv_num1 - gv_num2.
+diff_two_three = gv_num2 - gv_num3.
+
+
+
+ENDFUNCTION.
