@@ -1,0 +1,16 @@
+FUNCTION Z_ABPTRAIN_SML_EXER45_FM2.
+*"----------------------------------------------------------------------
+*"*"Local Interface:
+*"  EXPORTING
+*"     REFERENCE(SUM_ONE_TWO) TYPE  N
+*"     REFERENCE(SUM_TWO_THREE) TYPE  N
+*"----------------------------------------------------------------------
+
+*Adds global variables from function group
+  sum_one_two = gv_num1 + gv_num2.
+sum_two_three = gv_num2 + gv_num3.
+
+
+
+
+ENDFUNCTION.
