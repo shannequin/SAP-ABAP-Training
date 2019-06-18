@@ -1,0 +1,42 @@
+class ZCL_ABPTRAIN_SML_EXER48_VIEW definition
+  public
+  final
+  create public .
+
+public section.
+
+  data CONTR_DATA type ref to ZCL_ABPTRAIN_SML_EXER48_CONTR .
+
+  methods CONSTRUCTOR
+    importing
+      !CONTR_DATA type ref to ZCL_ABPTRAIN_SML_EXER48_CONTR .
+  methods DISPLAY_RESULT .
+protected section.
+private section.
+ENDCLASS.
+
+
+
+CLASS ZCL_ABPTRAIN_SML_EXER48_VIEW IMPLEMENTATION.
+
+
+* <SIGNATURE>---------------------------------------------------------------------------------------+
+* | Instance Public Method ZCL_ABPTRAIN_SML_EXER48_VIEW->CONSTRUCTOR
+* +-------------------------------------------------------------------------------------------------+
+* | [--->] CONTR_DATA                     TYPE REF TO ZCL_ABPTRAIN_SML_EXER48_CONTR
+* +--------------------------------------------------------------------------------------</SIGNATURE>
+  method CONSTRUCTOR.
+*Gets data from controller
+    me->contr_data = contr_data.
+  endmethod.
+
+
+* <SIGNATURE>---------------------------------------------------------------------------------------+
+* | Instance Public Method ZCL_ABPTRAIN_SML_EXER48_VIEW->DISPLAY_RESULT
+* +-------------------------------------------------------------------------------------------------+
+* +--------------------------------------------------------------------------------------</SIGNATURE>
+  method DISPLAY_RESULT.
+*Displays result from calculation
+    MESSAGE: |{ me->contr_data->calc_result }| TYPE 'I'.
+  endmethod.
+ENDCLASS.
