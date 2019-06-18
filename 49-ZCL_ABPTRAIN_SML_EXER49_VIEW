@@ -1,0 +1,61 @@
+class ZCL_ABPTRAIN_SML_EXER49_VIEW definition
+  public
+  final
+  create public .
+
+public section.
+
+  data CONTR_DATA type ref to ZCL_ABPTRAIN_SML_EXER49_CONTR .
+
+  methods CONSTRUCTOR
+    importing
+      !CONTR_DATA type ref to ZCL_ABPTRAIN_SML_EXER49_CONTR .
+  methods DISPLAY_RESULTS .
+protected section.
+private section.
+ENDCLASS.
+
+
+
+CLASS ZCL_ABPTRAIN_SML_EXER49_VIEW IMPLEMENTATION.
+
+
+* <SIGNATURE>---------------------------------------------------------------------------------------+
+* | Instance Public Method ZCL_ABPTRAIN_SML_EXER49_VIEW->CONSTRUCTOR
+* +-------------------------------------------------------------------------------------------------+
+* | [--->] CONTR_DATA                     TYPE REF TO ZCL_ABPTRAIN_SML_EXER49_CONTR
+* +--------------------------------------------------------------------------------------</SIGNATURE>
+  method CONSTRUCTOR.
+*Gets data from Controller
+    me->contr_data = contr_data.
+  endmethod.
+
+
+* <SIGNATURE>---------------------------------------------------------------------------------------+
+* | Instance Public Method ZCL_ABPTRAIN_SML_EXER49_VIEW->DISPLAY_RESULTS
+* +-------------------------------------------------------------------------------------------------+
+* +--------------------------------------------------------------------------------------</SIGNATURE>
+  method DISPLAY_RESULTS.
+*Display results if result variable is not NULL
+
+    "Add
+    IF me->contr_data->result_add IS NOT INITIAL.
+        MESSAGE: |Add: { me->contr_data->result_add }| TYPE 'I'.
+    ENDIF.
+
+    "Subtract
+    IF me->contr_data->result_sub IS NOT INITIAL.
+        MESSAGE: |Subtract: { me->contr_data->result_sub }| TYPE 'I'.
+    ENDIF.
+
+    "Multiply
+    IF me->contr_data->result_mult IS NOT INITIAL.
+        MESSAGE: |Multiply: { me->contr_data->result_mult }| TYPE 'I'.
+    ENDIF.
+
+    "Divide
+    IF me->contr_data->result_div IS NOT INITIAL.
+        MESSAGE: |Divide: { me->contr_data->result_div }| TYPE 'I'.
+    ENDIF.
+  endmethod.
+ENDCLASS.
