@@ -1,0 +1,52 @@
+REPORT Z_ABPTRAIN_SML_EXER42 MESSAGE-ID ZMSG_CLASS.
+
+*Exercise 42 - SELECTION-SCREEN
+
+*Maintain Selection Texts
+
+*Gets input for carrid and connid
+PARAMETERS: p_carrid(3) TYPE c, "Test: AA
+            p_connid(4) TYPE n. "Test: 0017
+
+*Boolean flags if carrid is found
+DATA paraFlag(1) TYPE c VALUE ' '.
+
+AT SELECTION-SCREEN.
+
+*Get carrid field
+SELECT carrid
+FROM scarr
+INTO TABLE @DATA(i_scarr).
+
+*Find carrid in field
+LOOP AT i_scarr ASSIGNING FIELD-SYMBOL(<fs_scarr>).
+  IF <fs_scarr>-carrid = p_carrid.
+    paraFlag = 'X'.
+    EXIT.
+  ENDIF.
+ENDLOOP.
+
+*Error message if carrid not found
+IF paraFlag = ' '.
+  MESSAGE E001.
+ENDIF.
+
+START-OF-SELECTION.
+
+*Get all fields from spfli where rows EQ carrid and connid
+SELECT spfli~*
+FROM spfli INNER JOIN scarr
+           ON spfli~carrid = scarr~carrid
+INTO TABLE @DATA(i_spfli)
+WHERE scarr~carrid = @p_carrid AND
+      spfli~connid = @p_connid.
+
+*Information message if nothing returns
+IF i_spfli IS INITIAL.
+  MESSAGE I002.
+ELSE.
+*Displays table if rows are returned
+  LOOP AT i_spfli ASSIGNING FIELD-SYMBOL(<fs_spfli>).
+    WRITE: / |{ <fs_spfli>-carrid } { <fs_spfli>-connid } { <fs_spfli>-countryfr } { <fs_spfli>-fltime }|.
+  ENDLOOP.
+ENDIF.
