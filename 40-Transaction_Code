@@ -1,0 +1,27 @@
+REPORT Z_ABPTRAIN_SML_EXER40.
+
+*Exercise 40 - Transaction Code
+
+LOAD-OF-PROGRAM.
+  IF sy-tcode <> 'Z999'.
+    MESSAGE: |Not loaded with tcode| TYPE 'X'.
+  ENDIF.
+
+*Exercise 40 - Transaction Code
+
+*Select contents of sflight and scarr where carrid = LH and connid = 401
+SELECT sflight~carrid,
+       sflight~connid,
+       sflight~fldate,
+       scarr~carrname,
+       scarr~url
+FROM sflight INNER JOIN scarr
+             ON sflight~carrid = scarr~carrid
+INTO TABLE @DATA(i_flight)
+WHERE sflight~carrid = 'LH' AND
+      sflight~connid = 401.
+
+*Display Airline, Flight Number, Date, Carrier Name, URL
+LOOP AT i_flight ASSIGNING FIELD-SYMBOL(<fs_flight>).
+  WRITE / |{ <fs_flight>-carrid } { <fs_flight>-connid } { <fs_flight>-fldate } { <fs_flight>-carrname } { <fs_flight>-url }|.
+ENDLOOP.
