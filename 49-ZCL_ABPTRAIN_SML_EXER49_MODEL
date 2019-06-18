@@ -1,0 +1,91 @@
+class ZCL_ABPTRAIN_SML_EXER49_MODEL definition
+  public
+  final
+  create public .
+
+public section.
+
+  data V_NUM1 type I .
+  data V_NUM2 type I .
+  data FLAG_ADD type C .
+  data FLAG_SUB type C .
+  data FLAG_MULT type C .
+  data FLAG_DIV type C .
+
+  methods CONSTRUCTOR
+    importing
+      !P_NUM1 type I
+      !P_NUM2 type I
+      !FLAG_A type C
+      !FLAG_S type C
+      !FLAG_M type C
+      !FLAG_D type C .
+  methods SET_MODEL_DATA
+    importing
+      !P_NUM1 type I
+      !P_NUM2 type I
+      !FLAG_A type C
+      !FLAG_S type C
+      !FLAG_M type C
+      !FLAG_D type C .
+protected section.
+private section.
+ENDCLASS.
+
+
+
+CLASS ZCL_ABPTRAIN_SML_EXER49_MODEL IMPLEMENTATION.
+
+
+* <SIGNATURE>---------------------------------------------------------------------------------------+
+* | Instance Public Method ZCL_ABPTRAIN_SML_EXER49_MODEL->CONSTRUCTOR
+* +-------------------------------------------------------------------------------------------------+
+* | [--->] P_NUM1                         TYPE        I
+* | [--->] P_NUM2                         TYPE        I
+* | [--->] FLAG_A                         TYPE        C
+* | [--->] FLAG_S                         TYPE        C
+* | [--->] FLAG_M                         TYPE        C
+* | [--->] FLAG_D                         TYPE        C
+* +--------------------------------------------------------------------------------------</SIGNATURE>
+  method CONSTRUCTOR.
+*Check range, throw error, else set attributes
+    "Input must be between 1 and 100 for both numbers
+    IF ( p_num1 < 0 OR p_num1 > 100 ) OR ( p_num2 < 0 OR p_num2 > 100 ).
+      v_num1 = 1.
+      v_num2 = 1.
+      MESSAGE: |Input out of range. Enter a number between 0 and 100.| TYPE 'I'.
+
+      "Go back to selection screen
+      LEAVE TO SCREEN 0.
+
+    ELSE.
+      v_num1 = p_num1. "Set first number
+      v_num2 = p_num2. "Set second number
+    ENDIF.
+       flag_add = flag_a. "Set add flag
+       flag_sub = flag_s. "Set subtract flag
+      flag_mult = flag_m. "Set multiply flag
+       flag_div = flag_d. "Set divide flag
+  endmethod.
+
+
+* <SIGNATURE>---------------------------------------------------------------------------------------+
+* | Instance Public Method ZCL_ABPTRAIN_SML_EXER49_MODEL->SET_MODEL_DATA
+* +-------------------------------------------------------------------------------------------------+
+* | [--->] P_NUM1                         TYPE        I
+* | [--->] P_NUM2                         TYPE        I
+* | [--->] FLAG_A                         TYPE        C
+* | [--->] FLAG_S                         TYPE        C
+* | [--->] FLAG_M                         TYPE        C
+* | [--->] FLAG_D                         TYPE        C
+* +--------------------------------------------------------------------------------------</SIGNATURE>
+  method SET_MODEL_DATA.
+*Set model data
+       v_num1 = p_num1. "Set first number
+       v_num2 = p_num2. "Set second number
+     flag_add = flag_a. "Set add flag
+     flag_sub = flag_s. "Set subtract flag
+    flag_mult = flag_m. "Set multiply flag
+     flag_div = flag_d. "Set divide flag
+  endmethod.
+ENDCLASS.
