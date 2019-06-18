@@ -1,0 +1,33 @@
+REPORT Z_ABPTRAIN_SML_EXER34.
+
+*Exercise 34 - SELECT INTO TABLE
+*Pass into an internal table and display
+
+*Maintain Selection Texts
+
+*Declare Parameters
+SELECTION-SCREEN BEGIN OF BLOCK block1.
+  PARAMETERS: p_carrid TYPE spfli-carrid,
+              p_connid TYPE spfli-connid.
+SELECTION-SCREEN END OF BLOCK block1.
+
+*Declare structure
+TYPES: BEGIN OF t_spfli,
+        airlineCode      TYPE spfli-carrid,
+        flightConnection TYPE spfli-connid,
+        countryKey       TYPE spfli-countryfr,
+END OF t_spfli.
+
+*Select into table with where clause
+SELECT carrid,
+       connid,
+       countryfr
+FROM spfli
+INTO TABLE @DATA(t_spfli)
+WHERE carrid = @p_carrid AND
+      connid = @p_connid.
+
+*Display internal table
+LOOP AT t_spfli ASSIGNING FIELD-SYMBOL(<fs_flight>).
+  WRITE / |{ <fs_flight>-carrid } { <fs_flight>-connid } { <fs_flight>-countryfr }|.
+ENDLOOP.
