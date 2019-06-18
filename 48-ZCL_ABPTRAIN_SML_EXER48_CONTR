@@ -1,0 +1,52 @@
+class ZCL_ABPTRAIN_SML_EXER48_CONTR definition
+  public
+  final
+  create public .
+
+public section.
+
+  data CALC_RESULT type P DECIMALS 2 .
+  data MODEL_DATA type ref to ZCL_ABPTRAIN_SML_EXER48_MODEL .
+
+  methods CONSTRUCTOR
+    importing
+      !MODEL_DATA type ref to ZCL_ABPTRAIN_SML_EXER48_MODEL .
+  methods CALC_NUM .
+protected section.
+private section.
+ENDCLASS.
+
+
+
+CLASS ZCL_ABPTRAIN_SML_EXER48_CONTR IMPLEMENTATION.
+
+
+* <SIGNATURE>---------------------------------------------------------------------------------------+
+* | Instance Public Method ZCL_ABPTRAIN_SML_EXER48_CONTR->CALC_NUM
+* +-------------------------------------------------------------------------------------------------+
+* +--------------------------------------------------------------------------------------</SIGNATURE>
+  method CALC_NUM.
+*Calculates numbers based on radio button selected
+    CASE me->model_data->rb_flag.
+      WHEN 'a'.
+        calc_result = me->model_data->v_num1 + me->model_data->v_num2.
+      WHEN 's'.
+        calc_result = me->model_data->v_num1 - me->model_data->v_num2.
+      WHEN 'm'.
+        calc_result = me->model_data->v_num1 * me->model_data->v_num2.
+      WHEN 'd'.
+        calc_result = me->model_data->v_num1 / me->model_data->v_num2.
+    ENDCASE.
+  endmethod.
+
+
+* <SIGNATURE>---------------------------------------------------------------------------------------+
+* | Instance Public Method ZCL_ABPTRAIN_SML_EXER48_CONTR->CONSTRUCTOR
+* +-------------------------------------------------------------------------------------------------+
+* | [--->] MODEL_DATA                     TYPE REF TO ZCL_ABPTRAIN_SML_EXER48_MODEL
+* +--------------------------------------------------------------------------------------</SIGNATURE>
+  method CONSTRUCTOR.
+*Gets model data
+    me->model_data = model_data.
+  endmethod.
+ENDCLASS.
