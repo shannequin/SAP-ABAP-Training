@@ -1,0 +1,42 @@
+FUNCTION ZTEST_CALCULATE.
+*"----------------------------------------------------------------------
+*"*"Local Interface:
+*"  IMPORTING
+*"     REFERENCE(NUM1) TYPE  DECFLOAT16
+*"     REFERENCE(NUM2) TYPE  DECFLOAT16
+*"     REFERENCE(RB_SELECTED) TYPE  STRING
+*"  EXCEPTIONS
+*"      NON_NUMBER
+*"----------------------------------------------------------------------
+*Declare structure to hold output message
+DATA output TYPE string.
+
+*Calculate Parameters based on radio button selected
+CASE rb_selected.
+*Sum
+  WHEN 'add'.
+    output = |The sum of { num1 } and { num2 } is { num1 + num2 }|.
+
+*Difference
+  WHEN 'sub'.
+    output = |The difference between { num1 } and { num2 } is { num1 - num2 }|.
+
+*Product
+  WHEN 'mult'.
+      output = |The product of { num1 } and { num2 } is { num1 * num2 }|.
+
+*Quotient
+  WHEN 'div'.
+      output = |The quotient of { num1 } and { num2 } is { num1 / num2 }|.
+
+*Modulo
+  WHEN 'mod'.
+      output = |The remainder of { num1 } and { num2 } is { num1 MOD num2 }|.
+ENDCASE.
+
+*Display output
+MESSAGE |{ output }| TYPE 'I'.
+
+
+
+ENDFUNCTION.
