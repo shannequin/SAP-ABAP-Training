@@ -1,0 +1,19 @@
+REPORT Z_ABPTRAIN_SML_EXER35.
+
+*Exercise 35 - Aggregates
+
+SELECT carrid,
+       connid,
+       fldate,
+       seatsmax - seatsocc AS EconSeatsLeft, "Economy seats left
+       seatsmax_b - seatsocc_b AS BusiSeatsLeft, "Business seats left
+       seatsmax_f - seatsocc_f AS FirstSeatsLeft, "First class seats left
+       planetype
+FROM sflight
+INTO TABLE @DATA(i_sflight) "Inline declaration for internal table
+ORDER BY planetype.
+
+*Display fields: Airline, Flight Number, Date from sflight + Show how many seats are left
+LOOP AT i_sflight ASSIGNING FIELD-SYMBOL(<fs_flight>).
+  WRITE / |{ <fs_flight>-carrid } { <fs_flight>-connid } { <fs_flight>-fldate } { <fs_flight>-EconSeatsLeft } { <fs_flight>-BusiSeatsLeft } { <fs_flight>-FirstSeatsLeft } { <fs_flight>-planetype }|.
+ENDLOOP.
