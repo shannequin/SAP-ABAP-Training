@@ -1,0 +1,27 @@
+REPORT Z_ABPTRAIN_SML_EXER33.
+
+*Exercise 33 - Select-Options
+*Select using parameters
+
+*Maintain Selection Texts
+
+*Declare Parameters
+SELECTION-SCREEN BEGIN OF BLOCK block1.
+  PARAMETERS: p_carrid TYPE spfli-carrid,
+              p_connid TYPE spfli-connid.
+SELECTION-SCREEN END OF BLOCK block1.
+
+TYPES: BEGIN OF t_spfli,
+        airlineCode      TYPE spfli-carrid,
+        flightConnection TYPE spfli-connid,
+        countryKey       TYPE spfli-countryfr,
+END OF t_spfli.
+
+SELECT carrid,
+              connid,
+              countryfr
+FROM spfli
+INTO @DATA(wa_spfli)
+WHERE carrid = @p_carrid AND
+      connid = @p_connid.
+ENDSELECT.
